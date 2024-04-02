@@ -3,10 +3,12 @@
 var {
     keywordType,
     resolutionKeywords,
-    codecKeywords,
-    audioKeywords,
+    audioCodecKeywords,
+    videoCodecKeywords,
+    hdrKeywords,
     lowQualityReleaseKeywords,
     highQualityReleaseKeywords,
+    containerKeywords,
     allKeywords
 } = require('./keywords')
 
@@ -29,10 +31,12 @@ var keywordsWithType = (function () {
     }
 
     addToAllKeywords(resolutionKeywords, keywordType.resolution)
-    addToAllKeywords(codecKeywords, keywordType.codec)
-    addToAllKeywords(audioKeywords, keywordType.audio)
+    addToAllKeywords(audioCodecKeywords, keywordType.audioCodec)
+    addToAllKeywords(videoCodecKeywords, keywordType.videoCodec)
+    addToAllKeywords(hdrKeywords, keywordType.hdr)
     addToAllKeywords(lowQualityReleaseKeywords, keywordType.lowQualitySrc)
     addToAllKeywords(highQualityReleaseKeywords, keywordType.highQualitySrc)
+    addToAllKeywords(containerKeywords, keywordType.container)
 
     return allKeywordsObj
 }())
@@ -44,7 +48,7 @@ function pushUniqueToArray(arr, val) {
 }
 
 function getExtra(filePath) {
-    var extraData = { resolution: [], audio: [], codec: [], lowQualitySrc: [], highQualitySrc: [], }
+    var extraData = { resolution: [], audioCodec: [], videoCodec: [], hdr: [], lowQualitySrc: [], highQualitySrc: [], container: []}
 
     if (!filePath
         || (typeof filePath !== 'string')) {
@@ -60,17 +64,23 @@ function getExtra(filePath) {
                 case keywordType.resolution:
                     pushUniqueToArray(extra.resolution, m)
                     break;
-                case keywordType.audio:
-                    pushUniqueToArray(extra.audio, m)
+                case keywordType.audioCodec:
+                    pushUniqueToArray(extra.audioCodec, m)
                     break;
-                case keywordType.codec:
-                    pushUniqueToArray(extra.codec, m)
+                case keywordType.videoCodec:
+                    pushUniqueToArray(extra.videoCodec, m)
+                    break;
+                case keywordType.hdr:
+                    pushUniqueToArray(extra.hdr, m)
                     break;
                 case keywordType.lowQualitySrc:
                     pushUniqueToArray(extra.lowQualitySrc, m)
                     break;
                 case keywordType.highQualitySrc:
                     pushUniqueToArray(extra.highQualitySrc, m)
+                    break;
+                case keywordType.container:
+                    pushUniqueToArray(extra.container, m)
                     break;
                 default:
                     break;

@@ -6,9 +6,9 @@ Parse names of video files to identify quality (e.g. 1080p), season/episode, yea
 var parseVideo = require("video-name-parser");
 parseVideo("south park s01e01.avi"); // { name: "south park", season: 1, episode: [1], type: "series", tag: [] }
 parseVideo("south park s01e01e02.avi"); // { name: "south park", season: 1, episode: [1,2], type: "series", tag: [] }
-parseVideo("The.Wizard.of.Oz.1939.1080p.BrRip.x264.mp4"); // { name: "wizard of oz", year: 1939, type: "movie", tag: [ "hd", "1080p" ] }
+parseVideo("The.Wizard.of.Oz.1939.1080p.BrRip.x264.mp4"); // { name: "the wizard of oz", year: 1939, type: "movie", tag: [ "hd", "1080p" ] }
 parseVideo("The.Wizard.of.Oz.1939.1080p.BrRip.x264.mp4", { extra: true }); // { ... extra: { resolution: ["1080p"], audio: [], codec: ["x264"], lowQualitySrc: [], highQualitySrc: ["brrip"] } }
-parseVideo("something else.mp4"); // { name: "other" } // no year or season/ep found, assuming 'other'
+parseVideo("something else.mp4"); // { type: "other" } // no year or season/ep found, assuming 'other'
 ```
 
 ## Returned properties
@@ -26,10 +26,12 @@ parseVideo("something else.mp4"); // { name: "other" } // no year or season/ep f
 **extra** - optional ```{ extra: true }```
 ```
 { 
-    resolution: [ '1080p' ],
-    audio: ['dts-hd'],
-    codec: [ 'x264' ],
+    resolution: ['1080p'],
+    audioCodec: ['dts-hd'],
+    videoCodec: ['x264'],
+    hdr: ['10bit'],
     lowQualitySrc: [],
-    highQualitySrc: [ 'brrip' ] 
+    highQualitySrc: ['brrip'],
+    container: ['mkv']
 }
 ```
