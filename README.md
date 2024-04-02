@@ -26,10 +26,12 @@ parseVideo("something else.mp4"); // { type: "other" } // no year or season/ep f
 **extra** - optional ```{ extra: true }```
 ```
 { 
-    resolution: [ '1080p' ],
-    audio: ['dts-hd'],
-    codec: [ 'x264' ],
+    resolution: ['1080p'],
+    audioCodec: ['dts-hd'],
+    videoCodec: ['x264'],
+    hdr: ['10bit'],
     lowQualitySrc: [],
-    highQualitySrc: [ 'brrip' ] 
+    highQualitySrc: ['brrip'],
+    container: ['mkv']
 }
 ```
